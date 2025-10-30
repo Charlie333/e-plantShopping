@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './ProductList.css'
+import './ProductList.css';
 import CartItem from './CartItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from './CartSlice';
@@ -7,7 +7,7 @@ import { addItem } from './CartSlice';
 
 function ProductList({ onHomeClick }) {
     const dispatch = useDispatch();
-    const CartItems = useSelector(state=> state.cart.items);
+    const CartItems = useSelector((state)=> state.cart.items);
     const calculateTotalQuantity = () => {
         return CartItems ? CartItems.reduce((total, item) => total + item.quantity, 0) : 0;
          };
@@ -314,6 +314,9 @@ function ProductList({ onHomeClick }) {
                             <button
                                 className="product-button"
                                 onClick={() => handleAddToCart(plant)} // Handle adding plant to cart
+                                disabled={
+                                    !!addedToCart[plant.name]
+                                  }
                             >
                                 Add to Cart
                             </button>
